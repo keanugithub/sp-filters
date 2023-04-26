@@ -6,5 +6,3 @@ address=/kaligram.com/#
 address=/nitromolto.com/#  
 address=/tvland.store/#
 
-# source contents
-https://big.oisd.nl/dnsmasq
