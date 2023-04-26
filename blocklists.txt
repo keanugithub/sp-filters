@@ -1,7 +1,9 @@
-# Version: 202304261206
-# Description: Block. Don't break.
-# Title: oisd big
-# Last modified: 2023-04-26T12:06:50+0000
-# Expires: 1 days (update frequency)
-# Homepage: https://oisd.nl
-# Syntax: DNSMasq below ver 2.86                                                     
+# Title: DNS Blocklist
+# Last modified: 2023-04-26 5:09PM                                                     
+
+address=/dealsandwins.net/#
+address=/kaligram.com/#
+address=/nitromolto.com/#  
+address=/tvland.store/#
+
+
