@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2.4.4 # Update to use Node.js 16
+        uses: actions/checkout@v2.5.1
       - name: Set up Python
-        uses: actions/setup-python@v2.4.3 # Update to use Node.js 16
+        uses: actions/setup-python@v2.2.2
         with:
           python-version: '3.10'
       - name: Install dependencies
