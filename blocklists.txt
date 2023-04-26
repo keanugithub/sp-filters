@@ -9,3 +9,14 @@ address=/sample.com/#
 address=/zxcxzcdsadasdas.com/#
 
 
+# Title: Manual Filter List
+# Last modified: 2023-04-26 5:09PM                                                     
+
+address=/dealsandwins.net/#
+address=/kaligram.com/#
+address=/nitromolto.com/#  
+address=/tvland.store/#
+address=/sample.com/#
+address=/zxcxzcdsadasdas.com/#
+
+
