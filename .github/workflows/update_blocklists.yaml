@@ -2,7 +2,7 @@ name: Update Blocklists
 
 on:
   schedule:
-    - cron: '20 23 * * *'
+    - cron: '21 23 * * *'
 
 jobs:
   update_blocklists:
