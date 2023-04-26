@@ -1,0 +1,31 @@
+name: Update Blocklists
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+
+jobs:
+  update_blocklists:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10' # Replace with the version of Python you are using
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt # Replace with the name of your requirements file
+      - name: Update blocklists
+        run: python update_blocklists.py
+      - name: Commit changes
+        run: |
+          git config --global user.email "kabbricenio@gmail.com" # Replace with your email
+          git config --global user.name "keanugithub" # Replace with your name
+          git add blocklists.txt
+          git commit -m "Update blocklists"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
