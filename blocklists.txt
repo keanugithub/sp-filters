@@ -1,7 +1,1 @@
-# Title: DNS Blocklist
-# Last modified: 2023-04-26 5:09PM                                                     
-
-address=/dealsandwins.net/#
-address=/kaligram.com/#
-address=/nitromolto.com/#  
-address=/tvland.store/#
+example new content
