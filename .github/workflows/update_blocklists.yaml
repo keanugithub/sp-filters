@@ -1,8 +1,6 @@
 name: Update Blocklists
 
-on:
-  schedule:
-    - cron: '50 23 * * *'
+on: [workflow_dispatch]
 
 jobs:
   update_blocklists:
