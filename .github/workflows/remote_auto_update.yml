@@ -1,6 +1,6 @@
-name: Update Blocklists 3
+name: Update Blocklists 1
 
-on: 
+on:
   workflow_dispatch:
 
 env:
@@ -40,7 +40,7 @@ jobs:
           github-token: ${{ secrets.SuperSecret }}
           script: |
             const { GitHub } = require('@actions/github');
-            const github = new GitHub(process.env.GITHUB_TOKEN);
+            const octokit = new GitHub(process.env.GITHUB_TOKEN);
             const repo = process.env.GITHUB_REPOSITORY;
             const branchName = process.env.GITHUB_REF.replace('refs/heads/', '');
             const commitMessage = "auto update by script";
@@ -49,7 +49,7 @@ jobs:
             const fileContent = fs.readFileSync(filePath, 'utf-8');
             const newContent = Buffer.from(fileContent).toString('base64');
             try {
-              const { data } = await github.repos.createOrUpdateFileContents({
+              const { data } = await octokit.repos.createOrUpdateFileContents({
                 owner: repo.split('/')[0],
                 repo: repo.split('/')[1],
                 path: filePath,
