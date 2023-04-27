@@ -1,4 +1,4 @@
-name: Update Blocklists
+name: Update Blocklists 2.0
 
 on: 
   workflow_dispatch:
