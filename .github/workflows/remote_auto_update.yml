@@ -1,7 +1,10 @@
-name: Update Blocklists 3.0
+name: Update Blocklists
 
 on: 
   workflow_dispatch:
+
+env:
+  SuperSecret: ${{ secrets.SuperSecret }}
 
 jobs:
   update_blocklists:
@@ -22,8 +25,6 @@ jobs:
           pip install -r requirements.txt
       - name: Update blocklists
         run: python3 auto.py
-        env:
-          SuperSecret: ${{ secrets.SuperSecret }}
       - name: Commit changes
         run: |
           git config --global user.email "kabbricenio@gmail.com"
@@ -33,32 +34,31 @@ jobs:
           # Use github-script action to push changes to remote repository
           # Requires 'repo' scope for the Personal Access Token
           # See https://github.com/actions/github-script#inputs
-          - name: Push changes to remote repository
-            uses: actions/github-script@v4
-            with:
-              github-token: ${{ secrets.SuperSecret }}
-              script: |
-                const { context, GitHub } = require('@actions/github');
-                const github = new GitHub(context.token);
-                const repo = context.repo;
-                const branchName = process.env.GITHUB_REF.replace('refs/heads/', '');
-                const commitMessage = "auto update by script";
-                const commitSha = context.payload.head_commit.id;
-                const filePath = "blocklists.txt";
-                const fs = require('fs');
-                const fileContent = fs.readFileSync(filePath, 'utf-8');
-                const newContent = Buffer.from(fileContent).toString('base64');
-                try {
-                  const { data } = await github.repos.createOrUpdateFileContents({
-                    owner: repo.owner,
-                    repo: repo.repo,
-                    path: filePath,
-                    message: commitMessage,
-                    content: newContent,
-                    sha: commitSha,
-                    branch: branchName
-                  });
-                  console.log(data);
-                } catch (error) {
-                  console.log(error);
-                }
+      - name: Push changes to remote repository
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.SuperSecret }}
+          script: |
+            const { context, GitHub } = require('@actions/github');
+            const github = new GitHub(context.token);
+            const repo = context.repo;
+            const branchName = process.env.GITHUB_REF.replace('refs/heads/', '');
+            const commitMessage = "auto update by script";
+            const commitSha = context.payload.head_commit.id;
+            const filePath = "blocklists.txt";
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            const newContent = Buffer.from(fileContent).toString('base64');
+            try {
+              const { data } = await github.repos.createOrUpdateFileContents({
+                owner: repo.owner,
+                repo: repo.repo,
+                path: filePath,
+                message: commitMessage,
+                content: newContent,
+                sha: commitSha,
+                branch: branchName
+              });
+              console.log(data);
+            } catch (error) {
+              console.log(error);
+            }
