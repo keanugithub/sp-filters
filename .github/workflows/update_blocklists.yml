@@ -28,10 +28,7 @@ jobs:
           git config --global user.name "keanugithub"
           git add blocklists.txt
           git commit -m "auto update by script"
-      - name: Print TOKEN value
-        run: echo $TOKEN
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
             github_token: ${{ secrets.TOKEN }}
-
