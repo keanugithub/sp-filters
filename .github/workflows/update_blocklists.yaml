@@ -20,7 +20,7 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Update blocklists
-        run: python auto_update_blocklists.py
+        run: python auto_up.py
       - name: Commit changes
         run: |
           git config --global user.email "kabbricenio@gmail.com"
