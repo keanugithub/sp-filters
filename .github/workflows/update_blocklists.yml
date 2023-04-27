@@ -1,6 +1,6 @@
 name: Update Blocklists
 
-on: [workflow_dispatch]
+on: workflow_dispatch
 
 jobs:
   update_blocklists:
