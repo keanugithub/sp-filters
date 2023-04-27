@@ -1,30 +1,61 @@
-name: Update File on GitHub
+name: Update Blocklists Online
 
 on: 
   workflow_dispatch:
 
 jobs:
-  update_file:
+  update_blocklists:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch existing file content
-        id: fetch_file_content
-        uses: wei/git-file@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2.5.2
         with:
-          repo: keanugithub/sp-filters
-          branch: main
-          path: blocklists.txt
-          token: ${{ secrets.SuperSecret }}
-      - name: Update file content
-        id: update_file_content
+          node-version: '16.x'
+      - name: Set up Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
         run: |
-          echo "[----------MANUAL SOURCE----------]\n\nmanual source content\n\n[----------AUTO SOURCE----------]\n\nauto source content\n$(echo ${{ steps.fetch_file_content.outputs.file_content }})" > blocklists.txt
-      - name: Commit and push changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: keanugithub
-          author_email: kabbricenio@gmail.com
-          message: auto update by script
-          add: .
-        env:
-          GITHUB_TOKEN: ${{ secrets.SuperSecret }}
+          pip install -r requirements.txt
+      - name: Update blocklists
+        run: python3 auto.py
+      - name: Commit changes
+        run: |
+          git config --global user.email "kabbricenio@gmail.com"
+          git config --global user.name "keanugithub"
+          git add blocklists.txt
+          git commit -m "auto update by script"
+          # Use github-script action to push changes to remote repository
+          # Requires 'repo' scope for the Personal Access Token
+          # See https://github.com/actions/github-script#inputs
+          - name: Push changes to remote repository
+            uses: actions/github-script@v4
+            with:
+              github-token: ${{ secrets.SuperSecret }}
+              script: |
+                const { context, GitHub } = require('@actions/github');
+                const github = new GitHub(context.token);
+                const repo = context.repo;
+                const branchName = process.env.GITHUB_REF.replace('refs/heads/', '');
+                const commitMessage = "auto update by script";
+                const commitSha = context.payload.head_commit.id;
+                const filePath = "blocklists.txt";
+                const fileContent = fs.readFileSync(filePath, 'utf-8');
+                const newContent = Buffer.from(fileContent).toString('base64');
+                try {
+                  const { data } = await github.repos.createOrUpdateFileContents({
+                    owner: repo.owner,
+                    repo: repo.repo,
+                    path: filePath,
+                    message: commitMessage,
+                    content: newContent,
+                    sha: commitSha,
+                    branch: branchName
+                  });
+                  console.log(data);
+                } catch (error) {
+                  console.log(error);
+                }
