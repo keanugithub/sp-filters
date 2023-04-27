@@ -39,7 +39,6 @@ jobs:
         with:
           github-token: ${{ secrets.SuperSecret }}
           script: |
-            const { context, GitHub } = require('@actions/github');
             const github = new GitHub(context.token);
             const repo = context.repo;
             const branchName = process.env.GITHUB_REF.replace('refs/heads/', '');
