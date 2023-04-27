@@ -1,9 +1,10 @@
 import requests
 import base64
 import json
+import os
 
 GITHUB_BRANCH = "main"
-GITHUB_TOKEN = "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"
+GITHUB_TOKEN = os.environ['GITHUB_TOKEN']
 GITHUB_REPO_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/blocklists.txt"
 MANUAL_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/manual_source"
 AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/auto_source"
