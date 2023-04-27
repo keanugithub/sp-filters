@@ -20,13 +20,13 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Update blocklists
-        run: python update_blocklists.py
+        run: python bago.py
       - name: Commit changes
         run: |
           git config --global user.email "kabbricenio@gmail.com"
           git config --global user.name "keanugithub"
           git add blocklists.txt
-          git commit -m "Update blocklists"
+          git commit -m "auto update by script"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
