@@ -3,7 +3,7 @@ import base64
 import json
 
 GITHUB_BRANCH = "main"
-GITHUB_TOKEN = "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"
+GITHUB_TOKEN = "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"
 print(GITHUB_TOKEN)
 GITHUB_REPO_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/blocklists.txt"
 MANUAL_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/manual_source"
