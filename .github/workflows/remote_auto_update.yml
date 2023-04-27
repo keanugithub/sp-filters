@@ -35,7 +35,7 @@ jobs:
           # Requires 'repo' scope for the Personal Access Token
           # See https://github.com/actions/github-script#inputs
       - name: Install @actions/github
-        run: npm install @actions/github
+        run: npm install @actions/github@4
       - name: Push changes to remote repository
         uses: actions/github-script@v4
         with:
