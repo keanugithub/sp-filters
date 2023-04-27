@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()  # Load environment variables from .env file
 
 github_token = os.getenv('GITHUB_TOKEN')  # Access the GITHUB_TOKEN environment variable
-print(GITHUB_TOKEN)
 
 GITHUB_BRANCH = "main"
 GITHUB_REPO_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/blocklists.txt"
