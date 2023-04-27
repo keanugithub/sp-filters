@@ -10,6 +10,7 @@ AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main
 
 # fetch blocklists.txt content
 response = requests.get(GITHUB_REPO_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + GITHUB_TOKEN})
+print(response.json())
 content = base64.b64decode(response.json()["content"]).decode()
 
 # fetch latest manual and auto sources
