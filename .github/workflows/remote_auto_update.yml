@@ -1,4 +1,4 @@
-name: Update Blocklists 1
+name: Update Blocklists 2
 
 on:
   workflow_dispatch:
@@ -41,8 +41,8 @@ jobs:
         with:
           github-token: ${{ secrets.SuperSecret }}
           script: |
-            const { GitHub } = require('@actions/github');
-            const octokit = new GitHub(process.env.GITHUB_TOKEN);
+            const { Octokit } = require('@octokit/rest');
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
             const repo = process.env.GITHUB_REPOSITORY;
             const branchName = process.env.GITHUB_REF.replace('refs/heads/', '');
             const commitMessage = "auto update by script";
