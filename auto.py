@@ -9,6 +9,10 @@ GITHUB_REPO_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/
 MANUAL_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/manual_source"
 AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/auto_source"
 
+if 'SuperSecret' not in os.environ:
+    print('Error: SuperSecret secret not set')
+    exit(1)
+
 # fetch blocklists.txt content
 response = requests.get(GITHUB_REPO_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
 content = base64.b64decode(response.json()["content"]).decode()
