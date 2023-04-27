@@ -3,7 +3,7 @@ name: Auto Commit and Push Python Script
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 19 * * *'
+    - cron: '20 19 * * *'
 
 env:
   SuperSecret: ${{ secrets.SuperSecret }}
