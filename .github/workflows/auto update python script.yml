@@ -15,4 +15,4 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run Python script
-        run: python auto_update.py
+        run: python auto.py
