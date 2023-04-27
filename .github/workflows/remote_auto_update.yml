@@ -1,0 +1,30 @@
+name: Update File on GitHub
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  update_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch existing file content
+        id: fetch_file_content
+        uses: wei/git-file@v1
+        with:
+          repo: keanugithub/sp-filters
+          branch: main
+          path: blocklists.txt
+          token: ${{ secrets.SuperSecret }}
+      - name: Update file content
+        id: update_file_content
+        run: |
+          echo "[----------MANUAL SOURCE----------]\n\nmanual source content\n\n[----------AUTO SOURCE----------]\n\nauto source content\n$(echo ${{ steps.fetch_file_content.outputs.file_content }})" > blocklists.txt
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: keanugithub
+          author_email: kabbricenio@gmail.com
+          message: auto update by script
+          add: .
+        env:
+          GITHUB_TOKEN: ${{ secrets.SuperSecret }}
