@@ -27,6 +27,8 @@ jobs:
       
       - name: Update blocklists
         run: python3 auto.py
+        env:
+          SuperSecret: ${{ secrets.SuperSecret }}
       - name: Commit changes
         run: |
           git config --global user.email "kabbricenio@gmail.com"
