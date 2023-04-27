@@ -30,6 +30,7 @@ jobs:
           git config --global user.name "keanugithub"
           git add blocklists.txt
           git commit -m "auto update by script" --allow-empty
+          git push
           # Use github-script action to push changes to remote repository
           # Requires 'repo' scope for the Personal Access Token
           # See https://github.com/actions/github-script#inputs
@@ -47,6 +48,7 @@ jobs:
                 const filePath = "blocklists.txt";
                 const fileContent = fs.readFileSync(filePath, 'utf-8');
                 const newContent = Buffer.from(fileContent).toString('base64');
+                const fs = require('fs'); // add this line
                 try {
                   const { data } = await github.repos.createOrUpdateFileContents({
                     owner: repo.owner,
