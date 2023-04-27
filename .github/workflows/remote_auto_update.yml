@@ -34,6 +34,8 @@ jobs:
           # Use github-script action to push changes to remote repository
           # Requires 'repo' scope for the Personal Access Token
           # See https://github.com/actions/github-script#inputs
+      - name: Install @actions/github
+        run: npm install @actions/github
       - name: Push changes to remote repository
         uses: actions/github-script@v4
         with:
