@@ -33,5 +33,5 @@ jobs:
         with:
             github_token: ${{ secrets.TOKEN }}
       - name: Print TOKEN value
-            run: echo $TOKEN
+        run: echo $TOKEN
 
