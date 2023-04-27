@@ -20,6 +20,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+      - name: Print TOKEN
+        run: echo $TOKEN
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+      
       - name: Update blocklists
         run: python3 auto.py
       - name: Commit changes
