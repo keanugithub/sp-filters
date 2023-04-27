@@ -2,6 +2,10 @@ name: Auto Update Script
 
 on: workflow_dispatch
 
+env:
+  SuperSecret: ${{ secrets.SuperSecret }}
+
+
 jobs:
   run:
     runs-on: ubuntu-latest
