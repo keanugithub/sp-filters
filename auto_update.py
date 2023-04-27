@@ -15,7 +15,7 @@ MANUAL_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/ma
 AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/auto_source"
 
 # fetch blocklists.txt content
-response = requests.get(GITHUB_REPO_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + GITHUB_TOKEN})
+response = requests.get(GITHUB_REPO_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + github_token})
 print(response.json())
 content = base64.b64decode(response.json()["content"]).decode()
 
