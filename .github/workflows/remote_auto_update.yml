@@ -29,7 +29,7 @@ jobs:
           git config --global user.email "kabbricenio@gmail.com"
           git config --global user.name "keanugithub"
           git add blocklists.txt
-          git commit -m "auto update by script"
+          git commit -m "auto update by script" --allow-empty
           # Use github-script action to push changes to remote repository
           # Requires 'repo' scope for the Personal Access Token
           # See https://github.com/actions/github-script#inputs
