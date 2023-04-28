@@ -22,11 +22,15 @@ content = base64.b64decode(response.json()["content"]).decode()
 
 new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}\n{content}"
 
-# update blocklists.txt on GitHub
+# Get latest SHA for the file
+response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
+sha = response.json()["sha"]
+
+# Update blocklists.txt on GitHub
 data = {
     "message": "blocklists updated by script",
     "content": base64.b64encode(new_content.encode()).decode(),
-    "sha": response.json()["sha"],
+    "sha": sha,
     "branch": GITHUB_BRANCH
 }
 response = requests.put(GITHUB_FILE_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
