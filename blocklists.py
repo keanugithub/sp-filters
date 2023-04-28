@@ -19,7 +19,7 @@ auto_source = requests.get(AUTO_SOURCE_URL).text.strip()
 new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}"
 
 # get current content of blocklists.txt from GitHub
-response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
+response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + GITHUB_TOKEN})
 current_content = base64.b64decode(response.json()["content"]).decode()
 
 # update blocklists.txt
@@ -29,4 +29,4 @@ data = {
     "sha": response.json()["sha"],
     "branch": GITHUB_BRANCH
 }
-response = requests.put(GITHUB_FILE_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
+response = requests.put(GITHUB_FILE_URL, headers={"Authorization": "Token " + GITHUB_TOKEN}, data=json.dumps(data))
