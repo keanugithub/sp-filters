@@ -20,7 +20,7 @@ manual_source = requests.get(MANUAL_SOURCE_URL).text.strip()
 auto_source = requests.get(AUTO_SOURCE_URL).text.strip()
 
 # combine sources with blocklists.txt content
-new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}\n{content}"
+new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}"
 
 # update blocklists.txt on GitHub
 data = {
