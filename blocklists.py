@@ -30,3 +30,4 @@ data = {
     "branch": GITHUB_BRANCH
 }
 response = requests.put(GITHUB_REPO_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
+print(response.json())
