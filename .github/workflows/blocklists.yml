@@ -1,4 +1,4 @@
-name: Auto Commit and Push Python Script
+name: Blocklists Auto-Update
 
 on:
   workflow_dispatch:
