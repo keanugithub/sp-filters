@@ -6,7 +6,6 @@ import os
 # naming assignments
 GITHUB_BRANCH = "main"
 GITHUB_TOKEN = os.environ['SuperSecret']
-GITHUB_REPO_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/blocklists.txt"
 GITHUB_FILE_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/blocklists.txt"
 
 MANUAL_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/manual_source.txt"
@@ -16,24 +15,19 @@ AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main
 manual_source = requests.get(MANUAL_SOURCE_URL).text.strip()
 auto_source = requests.get(AUTO_SOURCE_URL).text.strip()
 
-# combine sources with current content of blocklists.txt
+# create new content by combining sources
+new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}"
+
+# get current content of blocklists.txt from GitHub
 response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
-content = base64.b64decode(response.json()["content"]).decode()
+current_content = base64.b64decode(response.json()["content"]).decode()
 
-new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}\n{content}"
-
-# Get latest SHA for the file
-response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
-sha = response.json()["sha"]
-
-# Update blocklists.txt on GitHub
+# update blocklists.txt on GitHub
 data = {
     "message": "blocklists updated by script",
     "content": base64.b64encode(new_content.encode()).decode(),
-    "sha": sha,
+    "sha": response.json()["sha"],
     "branch": GITHUB_BRANCH
 }
 response = requests.put(GITHUB_FILE_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
-
-# print response from API
 print(response.json())
