@@ -1,5 +1,6 @@
 import os
 import requests
+import base64
 
 # Assigning variables
 GITHUB_BRANCH = "main"
@@ -11,10 +12,13 @@ EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 response = requests.get(EXTERNAL_URL_SOURCE)
 external_contents = response.content.decode()
 
-# Update the file in the repository with the contents of the external URL source
+# Encode the contents of the external URL source
+encoded_contents = base64.b64encode(external_contents.encode()).decode()
+
+# Update the file in the repository with the encoded contents of the external URL source
 data = {
-    "message": "Update auto_source from external URL",
-    "content": external_contents,
+    "message": "auto_source updated by script",
+    "content": encoded_contents,
     "branch": GITHUB_BRANCH
 }
 response = requests.put(GITHUB_API_URL, headers=GITHUB_HEADERS, json=data)
