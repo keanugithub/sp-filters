@@ -3,7 +3,7 @@ import requests
 
 # Assigning variables
 GITHUB_BRANCH = "main"
-GITHUB_API_URL = f"https://api.github.com/repos/keanugithub/sp-filters/contents/auto_source"
+GITHUB_API_URL = f"https://api.github.com/repos/keanugithub/sp-filters/contents/auto_source.txt"
 GITHUB_HEADERS = { "Authorization": f"token {os.environ['SuperSecret']}" }
 EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
