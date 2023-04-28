@@ -24,7 +24,7 @@ new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[-----
 
 # check if new content is different from current content
 if new_content != current_content:
-    # update blocklists.txt on GitHub
+    # update blocklists.txt
     data = {
         "message": "blocklists updated by script",
         "content": base64.b64encode(new_content.encode()).decode(),
