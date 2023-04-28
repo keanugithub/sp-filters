@@ -39,3 +39,4 @@ if response.status_code == 200:
         "sha": response.json()["content"]["sha"],
         "branch": GITHUB_BRANCH
     }
+response = requests.put(GITHUB_FILE_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
