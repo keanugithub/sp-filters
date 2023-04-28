@@ -4,14 +4,11 @@ import json
 import os
 
 GITHUB_BRANCH = "main"
-TOKEN = os.environ['SuperSecret']
+GITHUB_TOKEN = os.environ['SuperSecret']
 GITHUB_REPO_URL = "https://api.github.com/repos/keanugithub/sp-filters/contents/blocklists.txt"
+
 MANUAL_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/manual_source"
 AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main/auto_source"
-
-if 'SuperSecret' not in os.environ:
-    print('Error: SuperSecret secret not set')
-    exit(1)
 
 # fetch blocklists.txt content
 response = requests.get(GITHUB_REPO_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
@@ -26,11 +23,9 @@ new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[-----
 
 # update blocklists.txt on GitHub
 data = {
-    "message": "script auto update",
+    "message": "blocklists updated by script",
     "content": base64.b64encode(new_content.encode()).decode(),
     "sha": response.json()["sha"],
     "branch": GITHUB_BRANCH
 }
 response = requests.put(GITHUB_REPO_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
-
-print("success")
