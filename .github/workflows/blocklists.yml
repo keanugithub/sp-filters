@@ -25,7 +25,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Python script
-        run: python auto.py
+        run: python auto_blocklists.py
 
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v7
