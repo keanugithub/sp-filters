@@ -13,11 +13,12 @@ AUTO_SOURCE_URL = "https://raw.githubusercontent.com/keanugithub/sp-filters/main
 
 # fetch blocklists.txt content
 #response = requests.get(GITHUB_REPO_URL + "?ref=" + GITHUB_BRANCH, headers={"Authorization": "Token " + os.environ['SuperSecret']})
-#content = base64.b64decode(response.json()["content"]).decode()
+
 
 # fetch latest manual and auto sources
 manual_source = requests.get(MANUAL_SOURCE_URL).text.strip()
 auto_source = requests.get(AUTO_SOURCE_URL).text.strip()
+content = base64.b64decode(response.json()["content"]).decode()
 
 # combine sources with blocklists.txt content
 new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}"
@@ -26,7 +27,7 @@ new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[-----
 data = {
     "message": "blocklists updated by script",
     "content": base64.b64encode(new_content.encode()).decode(),
-    "sha": response.json()["sha"],
+    #"sha": response.json()["sha"],
     "branch": GITHUB_BRANCH
 }
 response = requests.put(GITHUB_REPO_URL, headers={"Authorization": "Token " + os.environ['SuperSecret']}, data=json.dumps(data))
