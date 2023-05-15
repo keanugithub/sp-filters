@@ -16,7 +16,7 @@ manual_source = requests.get(MANUAL_SOURCE_URL).text.strip()
 auto_source = requests.get(AUTO_SOURCE_URL).text.strip()
 
 # create new content by combining sources
-new_content = f"[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n[----------AUTO SOURCE----------]\n\n{auto_source}"
+new_content = f"#[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n#[----------AUTO SOURCE----------]\n\n{auto_source}"
 
 # get current content of blocklists.txt from GitHub
 response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers=GITHUB_HEADERS)
