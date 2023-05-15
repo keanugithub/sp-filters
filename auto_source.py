@@ -15,7 +15,7 @@ current_sha = response_data["sha"]
 # Download the contents of the external URL source
 response = requests.get(EXTERNAL_URL_SOURCE)
 external_contents = response.content.decode()
-external_contents = external_contents.replace("server", "address")
+external_contents = external_contents.replace("server", "local")
 
 # Encode the external contents to base64 format
 encoded_contents = base64.b64encode(external_contents.encode()).decode()
