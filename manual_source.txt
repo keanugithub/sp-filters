@@ -1,8 +1,8 @@
 # Title: Manual Filter List
-# Last modified: May 15, 2023 8:04PM                                                     
+# Last modified: May 15, 2023 8:26PM                                                     
 
-address=/dealsandwins.net/#
-address=/kaligram.com/#
-address=/nitromolto.com/#  
-address=/tvland.store/#
-address=/v.ht/updatenow/#
+local=/dealsandwins.net/#
+local=/kaligram.com/#
+local=/nitromolto.com/#  
+local=/tvland.store/#
+local=/v.ht/updatenow/#
