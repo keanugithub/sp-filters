@@ -3,6 +3,7 @@
 
 local=/dealsandwins.net/#
 local=/kaligram.com/#
-local=/nitromolto.com/#  
+local=/nitromolto.com/# 
 local=/tvland.store/#
 local=/v.ht/updatenow/#
+local=/mub.me/GCashAppVerify/#
