@@ -1,5 +1,5 @@
 # Title: Manual Filter List
-# Last modified: 2023-04-26 5:09PM                                                     
+# Last modified: May 15, 2023 8:04PM                                                     
 
 address=/dealsandwins.net/#
 address=/kaligram.com/#
