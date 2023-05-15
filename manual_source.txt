@@ -1,9 +1,9 @@
 # Title: Manual Filter List
 # Last modified: May 15, 2023 8:26PM                                                     
 
-local=/dealsandwins.net/#
-local=/kaligram.com/#
-local=/nitromolto.com/# 
-local=/tvland.store/#
-local=/v.ht/updatenow/#
-local=/mub.me/GCashAppVerify/#
+local=/dealsandwins.net/
+local=/kaligram.com/
+local=/nitromolto.com/
+local=/tvland.store/
+local=/v.ht/updatenow/
+local=/mub.me/GCashAppVerify/
