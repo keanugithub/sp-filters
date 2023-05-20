@@ -1,5 +1,6 @@
-import os
 import requests
+import base64
+import os
 
 # Assigning variables
 GITHUB_API_URL = f"https://api.github.com/repos/keanugithub/sp-filters/contents/auto_source.txt"
@@ -8,14 +9,18 @@ EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
 # Download the contents of the external URL source
 response = requests.get(EXTERNAL_URL_SOURCE)
-contented = response.text.replace("server", "local")
+external_contents = response.content.decode()
+external_contents = external_contents.replace("server", "local")
+
+# Encode the external contents to base64 format
+new_contents = base64.b64encode(external_contents.encode()).decode()
 
 # Update auto_source.txt
 data = {
     "message": "auto-source updated by script",
-    "content": contented,
+    "content": new_contents,
     "branch": "main",
-    }
+     }
 
 # Output to GitHub
 requests.put(GITHUB_API_URL, headers=GITHUB_HEADERS, json=data)
