@@ -32,4 +32,3 @@ jobs:
         with:
           author_name: keanugithub
           author_email: kbricenio@gbox.adnu.edu.ph
-          message: 'auto-source updated automatically'
