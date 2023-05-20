@@ -12,7 +12,6 @@ external_contents = requests.get(EXTERNAL_URL_SOURCE).content.decode().replace("
 
 # Update auto_source.txt and commit message
 data = {
-    "message": "auto-source updated by script",
     "content": base64.b64encode(external_contents.encode()).decode(),
     "branch": "main"
 }
