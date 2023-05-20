@@ -8,18 +8,18 @@ GITHUB_HEADERS = { "Authorization": f"token {os.environ['SuperSecret']}" }
 EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
 # Download the contents of the external URL source
-response = requests.get(EXTERNAL_URL_SOURCE)
-external_contents = response.content.decode().replace("server", "local")
+external_contents = requests.get(EXTERNAL_URL_SOURCE).content.decode().replace("server", "local")
 
-# Encode the external contents to base64 format
-new_contents = base64.b64encode(external_contents.encode()).decode()
-
-# Update auto_source.txt
+# Update auto_source.txt and commit message
 data = {
     "message": "auto-source updated by script",
-    "content": new_contents,
-    "branch": "main",
+    "content": base64.b64encode(external_contents.encode()).decode(),
+    "branch": "main"
 }
+
+# Retrieve SHA to ensure update
+current_sha = requests.get(GITHUB_API_URL, headers=GITHUB_HEADERS).json()["sha"]
+data["sha"] = current_sha
 
 # Output to GitHub
 requests.put(GITHUB_API_URL, headers=GITHUB_HEADERS, json=data)
