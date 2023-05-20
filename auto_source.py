@@ -8,7 +8,7 @@ EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
 # Download the contents of the external URL source
 response = requests.get(EXTERNAL_URL_SOURCE)
-contented = response.replace("server", "local")
+contented = response.text.replace("server", "local")
 
 # Update auto_source.txt
 data = {
