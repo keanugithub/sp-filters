@@ -19,7 +19,6 @@ data = {
     "message": "auto-source updated by script",
     "content": new_contents,
     "branch": "main",
-    "sha": response.json()["sha"],
 }
 
 # Output to GitHub
