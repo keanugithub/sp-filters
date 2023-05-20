@@ -7,7 +7,7 @@ GITHUB_API_URL = f"https://api.github.com/repos/keanugithub/sp-filters/contents/
 GITHUB_HEADERS = {"Authorization": f"token {os.environ['SuperSecret']}"}
 EXTERNAL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
-# retrieve the current sha of the auto source file from GitHub
+# retrieve the current sha to ensure the correct update
 response = requests.get(GITHUB_API_URL, headers=GITHUB_HEADERS)
 
 # download the contents of the external URL source and decode to base64
