@@ -10,13 +10,13 @@ EXTERNAL_SOURCE = "https://big.oisd.nl/dnsmasq"
 # Retrieve the current sha of the auto source file from GitHub
 response = requests.get(GITHUB_API_URL, headers=GITHUB_HEADERS)
 
-# Download the contents of the external URL source and encode to base64
-new_contents = base64.b64encode(requests.get(EXTERNAL_SOURCE).content).decode()
+# uownload the contents of the external URL source and decode to base64
+new_contents = requests.get(EXTERNAL_URL_SOURCE).content.decode().replace("server", "local")
 
-# Update auto_source.txt and output to GitHub
+# update auto_source.txt and output to GitHub
 data = {
     "message": "automatically updated",
-    "content": new_contents,
+    "content": base64.b64encode(new_contents.encode()).decode(),
     "branch": "main",
     "sha": response.json()["sha"]
 } 
