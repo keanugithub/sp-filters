@@ -7,18 +7,14 @@ GITHUB_API_URL = f"https://api.github.com/repos/keanugithub/sp-filters/contents/
 GITHUB_HEADERS = { "Authorization": f"token {os.environ['SuperSecret']}" }
 EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
-# Download the contents of the external URL source
-external_contents = requests.get(EXTERNAL_URL_SOURCE).content.decode().replace("server", "local")
-
-# Update auto_source.txt and commit message
+# Update auto_source.txt
+response = requests.get(GITHUB_API_URL, headers=GITHUB_HEADERS)
 data = {
-    "content": base64.b64encode(external_contents.encode()).decode(),
-    "branch": "main"
+    "message": "auto-source updated by script",
+    "content": base64.b64encode(requests.get(EXTERNAL_URL_SOURCE).content.decode().replace("server", "local").encode()).decode(),
+    "branch": "main",
+    "sha": response.json()["sha"]
 }
-
-# Retrieve SHA to ensure update
-current_sha = requests.get(GITHUB_API_URL, headers=GITHUB_HEADERS).json()["sha"]
-data["sha"] = current_sha
 
 # Output to GitHub
 requests.put(GITHUB_API_URL, headers=GITHUB_HEADERS, json=data)
