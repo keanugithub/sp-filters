@@ -7,13 +7,13 @@ GITHUB_HEADERS = { "Authorization": f"token {os.environ['SuperSecret']}" }
 EXTERNAL_URL_SOURCE = "https://big.oisd.nl/dnsmasq"
 
 # Download the contents of the external URL source
-response = requests.get(EXTERNAL_URL_SOURCE)
-external_contents = external_contents.replace("server", "local")
+new_content = requests.get(EXTERNAL_URL_SOURCE)
+contented = new_content.replace("server", "local")
 
 # Update auto_source.txt
 data = {
     "message": "auto-source updated by script",
-    "content": external_contents,
+    "content": contented,
     "branch": "main",
     }
 
