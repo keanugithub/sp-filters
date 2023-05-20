@@ -1,6 +1,4 @@
 import requests
-import base64
-import json
 import os
 
 # naming assignments
@@ -18,15 +16,12 @@ auto_source = requests.get(AUTO_SOURCE_URL).text.strip()
 # create new content by combining sources
 new_content = f"#[----------MANUAL SOURCE----------]\n\n{manual_source}\n\n#[----------AUTO SOURCE----------]\n\n{auto_source}"
 
-# get current content of blocklists.txt from GitHub
-response = requests.get(GITHUB_FILE_URL + "?ref=" + GITHUB_BRANCH, headers=GITHUB_HEADERS)
-current_content = base64.b64decode(response.json()["content"]).decode()
-
 # update blocklists.txt
 data = {
     "message": "blocklists updated by script",
-    "content": base64.b64encode(new_content.encode()).decode(),
-    "sha": response.json()["sha"],
+    "content": new_content,
     "branch": GITHUB_BRANCH
 }
-response = requests.put(GITHUB_FILE_URL, headers=GITHUB_HEADERS, data=json.dumps(data))
+
+# output to GitHub
+requests.put(GITHUB_FILE_URL, headers=GITHUB_HEADERS, data=json.dumps(data))
