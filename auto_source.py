@@ -11,7 +11,7 @@ EXTERNAL_SOURCE = "https://big.oisd.nl/dnsmasq"
 response = requests.get(GITHUB_API_URL, headers=GITHUB_HEADERS)
 
 # uownload the contents of the external URL source and decode to base64
-new_contents = requests.get(EXTERNAL_URL_SOURCE).content.decode().replace("server", "local")
+new_contents = requests.get(EXTERNAL_SOURCE).content.decode().replace("server", "local")
 
 # update auto_source.txt and output to GitHub
 data = {
